@@ -8,6 +8,6 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 Werkzeug==1.0.1
-tensorflow==2.0.0
+tensorflow==2.0.1
 keras
 bokeh==2.0.2
