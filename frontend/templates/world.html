@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>CoPrevent Website: Social-Good Hackathon</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+
+    <link
+            href="../static/dist/jqvmap.css"
+            media="screen"
+            rel="stylesheet"
+            type="text/css"
+    />
+
+    <script src="../static/js/world.js"></script>
+    <script
+            type="text/javascript"
+            src="https://code.jquery.com/jquery-1.11.3.min.js"
+    ></script>
+    <script type="text/javascript"
+            src="../static/dist/jquery.vmap.js"></script>
+    <script
+            type="text/javascript"
+            src="../static/dist/maps/jquery.vmap.world.js"
+    ></script>
+    <script
+            type="text/javascript"
+            src="../static/js/jquery.vmap.sampledata.js"
+    ></script>
+    <script type="text/javascript" src="../static/dist/maps/jquery.vmap.usa.js"
+            charset="utf-8"></script>
+
+
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.js"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.2.min.js"
+            integrity="sha384-ufR9RFnRs6lniiaFvtJziE0YeidtAgBRH6ux2oUItHw5WTvE1zuk9uzhUU/FJXDp"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+
+
+    <script>
+
+        $(function () {
+            $('form#predictionCasesTrendForm').on('submit', function (e) {
+                e.preventDefault();
+                let values = {};
+                $(this).find('input[type=text]').each(function () {
+                    let name = $(this).attr("name");
+                    values[name] = $(this).val();
+                });
+                $.ajax({
+                    type: 'post',
+                    url: '/survey',
+                    data: $(this).serialize(),
+                    success: function (response) {
+
+                        let url = window.location.href.split("/");
+                        let prot_host_port = url[0] + "//" + url[2];
+                        {#let countryName = 'world_en';#}
+                        let countryCode = values['country_region_code'];
+
+                        fetch(prot_host_port + "/codes", {
+                            method: 'GET'
+                        })
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (jsonResponse) {
+                                let results = jsonResponse.results;
+                                for (var i = 1; i < results.length; i++) {
+                                    if (results[i]['country_code'] === countryCode) {
+                                        console.log(results[i]['map_name']);
+                                        var countryName = results[i]['map_name'].split("_")[0];
+                                        break;
+                                    }
+                                }
+
+                                let message = "Country name: " + countryName
+                                    + "\n\n"
+                                    + "For the requested date: " + values['requested_date'] + " "
+                                    + "the last available was: " + response['starting_date'] + "."
+                                    + "\n\n"
+                                    + "Looking " + values['look_forward_days'] + " day(s) forward, "
+                                    + "on " + response['prediction_date'] + " the amount of new cases "
+                                    + "will be " + response['prediction_new_cases'] + "."
+                                    + "\n\n"
+                                    + "The general trend within the prediction window is " + response['trend'] + ".";
+
+                                alert(message);
+
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    }
+                });
+            });
+        });
+
+        jQuery(document).ready(function () {
+            jQuery("#vmap").vectorMap({
+                map: "world_en",
+                backgroundColor: "#FAFAFA",
+                color: "#ffffff",
+                hoverOpacity: 0.7,
+                selectedColor: "#F37068",
+                enableZoom: false,
+                showTooltip: true,
+                scaleColors: ["#C8EEFF", "#006491"],
+                values: sample_data,
+                normalizeFunction: "polynomial",
+                onRegionClick: function (element, code, region) {
+                    document.getElementById("navigateStep2").click();
+
+                }
+            });
+        });
+
+        $(function () {
+            $('#selectedCountryImg').vectorMap({
+                map: 'usa_en',
+                enableZoom: false,
+                showTooltip: true,
+                selectedColor: null,
+                hoverColor: null,
+                color: '#006491',
+                regionsSelectable: false
+            });
+        });
+    </script>
+
+
+    <link rel="stylesheet" href="../static/mainStyle.css"/>
+
+    <style>
+        div.scrollable {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="vmap"></div>
+<div class="top"></div>
+<img
+        class="titleImg"
+        src="../static/images/HackathonWebsiteTitle.png"
+        alt=""
+/>
+<img class="teamLogo" src="../static/images/Hackathon Logo.png" alt=""/>
+<p class="instruction1">
+    <strong> 1. </strong>Please select a country by clicking to predict
+    <br/>COVID-19 flow with your own decision
+</p>
+<button
+        onclick="clickToShowStep2()"
+        id="navigateStep2"
+        style="visibility: hidden;"
+>
+    Navigate to Step 2
+</button>
+
+<a
+        href="#UpdatingWeeklyActivities"
+        id="anchorStep2"
+        style="visibility: hidden;"
+>
+    click me to step2</a
+>
+<!-- Step2 -->
+<a name="UpdatingWeeklyActivities"></a>
+<!-- step 2 Anchor -->
+
+<div id="step2WholeSurvey" style="visibility: hidden; overflow: hidden; height: 0; width: 100%; display: block;">
+    <img
+            class="titleWeeklyActivities"
+            src="../static/images/HackathonWeeklyActivities.png"
+            alt=""
+    />
+    <p class="instruction">
+        <strong>
+            2.
+        </strong>
+        Please Update your expected weekly activities
+        <br/>
+        and choose wisely for better preventing COVID-19 flow
+    </p>
+
+    <div class="section-title-box">
+        Predict new COVID-19 cases in 3 days and see the trend!
+    </div>
+    <!-- Select Country -->
+    <div class="selectedCountryImg" id="selectedCountryImg"></div>
+
+    <!-- Survey -->
+    <div class="predictionCasesTrendForm">
+        <form id="predictionCasesTrendForm">
+            <h3>Starting date</h3>
+            <input type="text" name="requested_date" placeholder="YYYY-mm-dd"/>
+            <h3>Prediction window</h3>
+            <input type="text" name="look_forward_days" placeholder="Enter 3"/>
+            <h3>Country</h3>
+            <input type="text" name="country_region_code"
+                   placeholder="Enter US"/>
+            <br/>
+            <br/>
+            <button type="submit" name="submit" id="submit">Submit</button>
+        </form>
+    </div>
+    <!-- end of the step2WholeSurvey div -->
+</div>
+<div id="graph">
+    <div class="section-title-box">
+        Compare changes in residential searches during the lockdown!
+    </div>
+    <div class="widget">
+        {{ script|indent(4)|safe }}
+    </div>
+
+
+</div>
+
+</body>
+</html>

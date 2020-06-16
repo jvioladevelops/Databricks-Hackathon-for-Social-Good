@@ -1,0 +1,189 @@
+body {
+  background-color: #FAFAFA;
+  background-repeat: no-repeat;
+}
+
+
+#graph {
+  position: relative;
+  display:inline-block;
+  left: 5px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+
+
+#stats {
+  font-family: Ariel;
+  height: 100px;
+
+  color: Black;
+  font-weight: bolder;
+  position: absolute;
+}
+
+
+
+
+.BGimage {
+  width: 100%;
+  margin-top: -920px;
+}
+
+.top {
+  height: 110px;
+  width: 101%;
+  background-color: white;
+  margin-left: -10px;
+  margin-top: -1150px;
+  margin-right: -10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+}
+
+.titleImg {
+  display: block;
+  /* margin: -1030px auto; */
+  width: 280px;
+  /* margin-top: -30px; */
+  /* margin-top: -1030px; */
+  margin: 0 auto;
+  /* margin-top: -100px; */
+  top: -1000px;
+  /* float: right; */
+  position: relative;
+}
+
+.teamLogo {
+  width: 115px;
+  top: 30px;
+  /* margin-top: -1100px; */
+  /* margin-top: -1240px; */
+  float: left;
+  margin-left: 10px;
+  position: absolute;
+  background-repeat: no-repeat;
+}
+
+#vmap {
+  width: 90%;
+  height: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 130px;
+  /* border: 1px blueviolet solid; */
+  position: absolute;
+}
+
+.titleText {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: Black;
+  font-weight: bolder;
+  margin-top: -450px;
+  margin-left: 3%;
+  /* position: absolute; */
+}
+
+.instruction1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: lighter;
+  font-size: xx-small;
+  top: 250px;
+  /* margin-top: -880px; */
+  margin-left: 42%;
+  text-align: center;
+  /* line-height: 0.42cm; */
+  position: absolute;
+}
+
+.titleWeeklyActivities {
+  display: block;
+  margin: 0 auto;
+  width: 280px;
+}
+
+.instruction {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: lighter;
+  font-size: xx-small;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  /* line-height: 0.42cm; */
+}
+
+.section-title-box {
+  width: 103%;
+  height: 50px;
+  background-color: #4E9ABC;
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-top: 60px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 23px;
+  padding-top: 20px;
+}
+
+.selectedCountryImg {
+  /* border: 1px blueviolet solid; */
+  width: 50%;
+  margin-left: -8px;
+  height: 650px;
+  float: left;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.predictionCasesTrendForm {
+  width: 50%;
+  margin-right: -8px;
+  height: 650px;
+  float: right;
+  /* background-color: #F4F4F4; */
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.predictionCasesTrendForm h3 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 70px;
+}
+
+.predictionCasesTrendForm input {
+  background-color: white;
+  border: 1px #DBDBDB solid;
+  height: 40px;
+  width: 300px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  /* margin-top: 50px; */
+  /* top: 50px; */
+}
+
+.predictionCasesTrendForm button {
+  width: 250px;
+  height: 50px;
+  border-radius: 25px;
+  display: block;
+  margin: 0 auto;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: white;
+  border: 1px #4E9ABC none;
+  font-size: 20px;
+  background-color: #4E9ABC;
+  margin-top: 30px;
+  /* position: absolute; */
+}
+
+/* a {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: lighter;
+  font-size: xx-small;
+} */

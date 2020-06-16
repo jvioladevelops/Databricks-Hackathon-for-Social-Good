@@ -1,0 +1,17 @@
+country_code,map_name
+DZ,algeria_en
+AR,argentina_en
+BR,brazil_en
+HR,croatia_en
+FR,france_en
+DE,germany_en
+GR,greece_en
+ID,indonesia_en
+IR,iran_en
+IQ,iraq_en
+RU,russia_en
+RS,serbia_en
+TN,tunisia_en
+TR,turkey_en
+UA,ukraine_en
+US,usa_en
